@@ -1,11 +1,9 @@
 services:
-  # Backend Service
+  # Backend Service (Docker)
   - type: web
     name: task-manager-backend
-    env: native
+    env: docker
     rootDir: Task-Manager
-    buildCommand: ./mvnw clean install -DskipTests
-    startCommand: java -jar target/*.jar
     plan: free
     envVars:
       - key: DATABASE_HOST
