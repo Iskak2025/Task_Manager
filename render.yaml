@@ -42,7 +42,7 @@ services:
         fromService:
           name: task-manager-backend
           type: web
-          property: host
+          property: url
 
 databases:
   - name: task-manager-db
