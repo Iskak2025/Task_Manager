@@ -2,16 +2,24 @@ services:
   # Backend Service
   - type: web
     name: task-manager-backend
-    env: java
+    env: native
     rootDir: Task-Manager
     buildCommand: ./mvnw clean install -DskipTests
     startCommand: java -jar target/*.jar
     plan: free
     envVars:
-      - key: DATABASE_URL
+      - key: DATABASE_HOST
         fromDatabase:
           name: task-manager-db
-          property: jdbcInternalUrl
+          property: host
+      - key: DATABASE_PORT
+        fromDatabase:
+          name: task-manager-db
+          property: port
+      - key: DATABASE_NAME
+        fromDatabase:
+          name: task-manager-db
+          property: database
       - key: DATABASE_USERNAME
         fromDatabase:
           name: task-manager-db
