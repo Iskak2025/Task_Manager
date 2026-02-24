@@ -1,11 +1,17 @@
 import axios from 'axios';
 
+let baseURL = import.meta.env.VITE_API_BASE_URL || '/api';
+if (baseURL !== '/api') {
+    if (!baseURL.startsWith('http')) {
+        baseURL = `https://${baseURL}.onrender.com`;
+    }
+    if (!baseURL.endsWith('/api')) {
+        baseURL = baseURL.endsWith('/') ? `${baseURL}api` : `${baseURL}/api`;
+    }
+}
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL
-        ? (import.meta.env.VITE_API_BASE_URL.endsWith('/api')
-            ? import.meta.env.VITE_API_BASE_URL
-            : `${import.meta.env.VITE_API_BASE_URL}/api`)
-        : '/api',
+    baseURL,
 });
 
 api.interceptors.request.use((config) => {
