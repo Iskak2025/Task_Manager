@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }) => {
 const AppContent = () => {
   const { user } = useAuth();
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       {user && <Navbar />}
       <div className="container">
         <Routes>
